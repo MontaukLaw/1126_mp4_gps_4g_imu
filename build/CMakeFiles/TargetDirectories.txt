@@ -1,0 +1,4 @@
+/home/marc/my_project/1126_mp4/build/CMakeFiles/ai_test.dir
+/home/marc/my_project/1126_mp4/build/CMakeFiles/app.dir
+/home/marc/my_project/1126_mp4/build/CMakeFiles/edit_cache.dir
+/home/marc/my_project/1126_mp4/build/CMakeFiles/rebuild_cache.dir
