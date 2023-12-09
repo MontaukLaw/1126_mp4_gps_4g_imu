@@ -24,7 +24,7 @@ void create_new_video_file(void)
 {
     char filename[128] = {0};
     // get_file_name_by_date_time(filename, "%s%lld.h264");
-    get_file_name_by_date_time(filename, "%s.h264");
+    get_file_name_by_date_time(filename, "%lld.h264");
     // sprintf(filename, "/userdata/video/%d.h264", g_file_number);
     g_output_video_file = fopen(filename, "wb");
 

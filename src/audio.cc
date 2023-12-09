@@ -34,7 +34,8 @@ FreqIdx FreqIdxTbl[13] = {{96000, 0}, {88200, 1}, {64000, 2}, {48000, 3}, {44100
 void create_audio_file(void)
 {
     char filename[128] = {0};
-    get_file_name_by_date_time(filename, "%s%lld.mp3");
+    get_file_name_by_date_time(filename, "%lld.mp3");
+    // get_file_name_by_date_time(filename, "%s%lld.mp3");
     g_output_audio_file = fopen(filename, "wb");
 }
 
