@@ -155,6 +155,19 @@ opencv_demo/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_demo.dir/build.make CMakeFiles/opencv_demo.dir/build
 .PHONY : opencv_demo/fast
 
+#=============================================================================
+# Target rules for targets named uploader
+
+# Build rule for target.
+uploader: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 uploader
+.PHONY : uploader
+
+# fast build rule for target.
+uploader/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/build
+.PHONY : uploader/fast
+
 src/app.o: src/app.cc.o
 .PHONY : src/app.o
 
@@ -305,6 +318,7 @@ src/simple_ftp_uploader.o: src/simple_ftp_uploader.cc.o
 # target to build an object file
 src/simple_ftp_uploader.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/simple_ftp_uploader.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/src/simple_ftp_uploader.cc.o
 .PHONY : src/simple_ftp_uploader.cc.o
 
 src/simple_ftp_uploader.i: src/simple_ftp_uploader.cc.i
@@ -313,6 +327,7 @@ src/simple_ftp_uploader.i: src/simple_ftp_uploader.cc.i
 # target to preprocess a source file
 src/simple_ftp_uploader.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/simple_ftp_uploader.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/src/simple_ftp_uploader.cc.i
 .PHONY : src/simple_ftp_uploader.cc.i
 
 src/simple_ftp_uploader.s: src/simple_ftp_uploader.cc.s
@@ -321,7 +336,32 @@ src/simple_ftp_uploader.s: src/simple_ftp_uploader.cc.s
 # target to generate assembly for a file
 src/simple_ftp_uploader.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/simple_ftp_uploader.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/src/simple_ftp_uploader.cc.s
 .PHONY : src/simple_ftp_uploader.cc.s
+
+src/upload_demo.o: src/upload_demo.cc.o
+.PHONY : src/upload_demo.o
+
+# target to build an object file
+src/upload_demo.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/src/upload_demo.cc.o
+.PHONY : src/upload_demo.cc.o
+
+src/upload_demo.i: src/upload_demo.cc.i
+.PHONY : src/upload_demo.i
+
+# target to preprocess a source file
+src/upload_demo.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/src/upload_demo.cc.i
+.PHONY : src/upload_demo.cc.i
+
+src/upload_demo.s: src/upload_demo.cc.s
+.PHONY : src/upload_demo.s
+
+# target to generate assembly for a file
+src/upload_demo.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/src/upload_demo.cc.s
+.PHONY : src/upload_demo.cc.s
 
 src/uploader.o: src/uploader.cc.o
 .PHONY : src/uploader.o
@@ -329,6 +369,7 @@ src/uploader.o: src/uploader.cc.o
 # target to build an object file
 src/uploader.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/uploader.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/src/uploader.cc.o
 .PHONY : src/uploader.cc.o
 
 src/uploader.i: src/uploader.cc.i
@@ -337,6 +378,7 @@ src/uploader.i: src/uploader.cc.i
 # target to preprocess a source file
 src/uploader.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/uploader.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/src/uploader.cc.i
 .PHONY : src/uploader.cc.i
 
 src/uploader.s: src/uploader.cc.s
@@ -345,6 +387,7 @@ src/uploader.s: src/uploader.cc.s
 # target to generate assembly for a file
 src/uploader.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/uploader.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/src/uploader.cc.s
 .PHONY : src/uploader.cc.s
 
 src/utils.o: src/utils.cc.o
@@ -353,6 +396,7 @@ src/utils.o: src/utils.cc.o
 # target to build an object file
 src/utils.cc.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/utils.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/src/utils.cc.o
 .PHONY : src/utils.cc.o
 
 src/utils.i: src/utils.cc.i
@@ -361,6 +405,7 @@ src/utils.i: src/utils.cc.i
 # target to preprocess a source file
 src/utils.cc.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/utils.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/src/utils.cc.i
 .PHONY : src/utils.cc.i
 
 src/utils.s: src/utils.cc.s
@@ -369,6 +414,7 @@ src/utils.s: src/utils.cc.s
 # target to generate assembly for a file
 src/utils.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/utils.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/src/utils.cc.s
 .PHONY : src/utils.cc.s
 
 src/vi_rga_venc.o: src/vi_rga_venc.cc.o
@@ -454,6 +500,7 @@ help:
 	@echo "... ai_test"
 	@echo "... app"
 	@echo "... opencv_demo"
+	@echo "... uploader"
 	@echo "... src/app.o"
 	@echo "... src/app.i"
 	@echo "... src/app.s"
@@ -475,6 +522,9 @@ help:
 	@echo "... src/simple_ftp_uploader.o"
 	@echo "... src/simple_ftp_uploader.i"
 	@echo "... src/simple_ftp_uploader.s"
+	@echo "... src/upload_demo.o"
+	@echo "... src/upload_demo.i"
+	@echo "... src/upload_demo.s"
 	@echo "... src/uploader.o"
 	@echo "... src/uploader.i"
 	@echo "... src/uploader.s"

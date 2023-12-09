@@ -68,3 +68,6 @@ set(OPENCV_LIBS opencv_core opencv_imgcodecs opencv_imgproc opencv_features2d op
 add_executable(opencv_demo src/cv_demo.cc)
 include_directories(opencv_demo ${CMAKE_SOURCE_DIR}/opencv/include)
 target_link_libraries(opencv_demo ${OPENCV_LIBS})
+
+add_executable(uploader src/upload_demo.cc src/simple_ftp_uploader.cc src/uploader.cc src/utils.cc)
+target_link_libraries(uploader ${OPENCV_LIBS} ${RKNN_LIBS} pthread dl ${THIRD_MEDIA} ${MP4_LIBS})

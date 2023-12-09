@@ -90,7 +90,7 @@ static void *GetAudioMediaBuffer(void *params)
             break;
         }
 
-#if 1
+#if 0
         printf("#%d Get Frame:ptr:%p, size:%zu, mode:%d, channel:%d, "
                "timestamp:%lld\n",
                cnt++, RK_MPI_MB_GetPtr(mb), RK_MPI_MB_GetSize(mb),

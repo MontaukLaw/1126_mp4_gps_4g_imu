@@ -46,4 +46,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/ai_test.dir/DependInfo.cmake"
   "CMakeFiles/app.dir/DependInfo.cmake"
   "CMakeFiles/opencv_demo.dir/DependInfo.cmake"
+  "CMakeFiles/uploader.dir/DependInfo.cmake"
   )

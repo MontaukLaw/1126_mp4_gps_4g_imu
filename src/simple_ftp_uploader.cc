@@ -189,7 +189,7 @@ int connect_ftp_server(const char *server_ip, const int port)
         printf("read error\n");
         return -1;
     }
-    printf("%s ret=%d \n", read_buf, ret);
+    // printf("%s ret = %d \n", read_buf, ret);
 
     if (strncmp(read_buf, ACK_CONNECT_NUM, 3) == 0) /*成功*/
     {
@@ -537,7 +537,7 @@ static int send_cmd(int ctrl_sock, eu_cmd_type typ, const char *val, const char 
     default:
         break;
     }
-    printf("FTP server ack= %s\n", read_buf);
+    // printf("FTP server ack= %s\n", read_buf);
     return ret;
 }
 
@@ -636,7 +636,7 @@ static int enter_active_mode(int ctrl_sock)
 #endif
 
     sprintf(send_buf, "%hu,%hu,%hu,%hu,%hu,%hu", ip0, ip1, ip2, ip3, p1, p2);
-    printf("send_buf =%s server_port=%d\n", send_buf, server_port);
+    // printf("send_buf =%s server_port=%d\n", send_buf, server_port);
     ret = send_cmd(ctrl_sock, CMD_PORT_FTP, send_buf, ACK_PORT_NUM);
     if (ret < 0)
     {
@@ -781,7 +781,7 @@ int down_file_ftpserver(int ctrl_sock, char *server_filepath_name,
         }
     }
 
-    printf("server path = %s ;file name =%s\n", server_info.server_path, server_info.server_filename);
+    printf("Server path = %s; file name = %s\n", server_info.server_path, server_info.server_filename);
 
     if ((typ != CMD_RETR) && (typ != CMD_LIST))
     {
@@ -984,7 +984,7 @@ int up_file_ftpserver(int ctrl_sock, char *server_filepath_name,
         }
     }
 
-    printf("server path = %s ;file name =%s\n", server_info.server_path, server_info.server_filename);
+    printf("server path = %s file name =%s\n", server_info.server_path, server_info.server_filename);
 
     if (connect_mode)
     { /*主动模式*/
@@ -1109,7 +1109,7 @@ err0:
     memset(rec_buf, 0, sizeof(rec_buf));
     /* 客户端接收服务器的响应码和信息，正常为 ”226 Transfer complete.” */
     read(ctrl_sock, rec_buf, sizeof(rec_buf));
-    printf("%s\n Up file end!!!\n", rec_buf);
+    printf("%s\nUp file end!!!\n", rec_buf);
 
     return ret;
 }
@@ -1148,7 +1148,7 @@ int get_fsize_ftpserver(int ctrl_sock, char *server_filepath_name)
         printf("send SZIE failed\n");
         return -1;
     }
-    // printf("file size =%d\n",ret);
+    printf("Remote file size =%d bytes\n",ret);
     return ret;
 }
 

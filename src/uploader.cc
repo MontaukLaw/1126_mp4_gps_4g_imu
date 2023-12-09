@@ -4,6 +4,7 @@
 #include "simple_ftp_uploader.h"
 #include "pthread.h"
 #include <unistd.h>
+#include <sys/stat.h>
 
 #define FTP_SERVER_IP "118.195.247.171"
 #define FTP_SERVER_USER "huang"
@@ -24,13 +25,15 @@ typedef struct
 ftp_client_st ftp_st;
 bool ifUploaderFileReady = false;
 extern bool ifUpload;
-extern char uploadFileName[];
+// extern char uploadFileName[];
 extern bool quit;
+extern char h264FileName[];
 
-static void upload(void);
+static void ftp_upload(void);
 
 void *file_uploader_process(void *params)
 {
+
     while (quit == false)
     {
         if (!ifUpload)
@@ -43,13 +46,14 @@ void *file_uploader_process(void *params)
             continue;
         }
 
-        ifUploaderFileReady = true;
-        printf("start upload file: %s\n", uploadFileName);
+        ftp_upload();
 
         ifUploaderFileReady = false;
 
         usleep(100000);
     }
+
+    return NULL;
 }
 
 void create_uploader_process(void)
@@ -58,12 +62,29 @@ void create_uploader_process(void)
     pthread_create(&uploader_thread, NULL, file_uploader_process, NULL);
 }
 
-static void upload(void)
+// char str[1024 * 1024];
+static void ftp_upload(void)
 {
-    char str[MAX_BUF_LEN] = {0};
+    // char *str = (char *)malloc(1024 * 1024);
+    char str[128];
     int ret = -1;
+    struct stat file_stat;
+    printf("\n");
+    printf("\n");
 
-    printf("*************\n");
+    printf("**********************************************************\n");
+
+    // ifUploaderFileReady = true;
+    if (stat(h264FileName, &file_stat) == 0)
+    {
+        // 文件大小以字节为单位
+        printf("File size of %s: %ld bytes\n", h264FileName, file_stat.st_size);
+    }
+    else
+    {
+        perror("Error getting file size");
+        return;
+    }
     // printf("Please input the ftp server ip: ");
     memset(str, 0, sizeof(str));
     // scanf("%s",str); //从终端获取到服务器ip地址。
@@ -80,7 +101,7 @@ static void upload(void)
 
     strcpy(ftp_st.usr, FTP_SERVER_USER);
     strcpy(ftp_st.passwd, FTP_SERVER_PASS);
-    printf("input usr:%s passwd:%s\n", ftp_st.usr, ftp_st.passwd);
+    printf("FTP Username:%s Password:%s\n", ftp_st.usr, ftp_st.passwd);
     ret = login_ftp_server(ftp_st.control_sock, ftp_st.usr, ftp_st.passwd);
     if (ret < 0)
     {
@@ -89,11 +110,17 @@ static void upload(void)
     }
 
     char remoteFileName[128];
-    sprintf(remoteFileName, "/home/huang/%s", uploadFileName);
+    sprintf(remoteFileName, "/home/huang/%s", h264FileName);
 
-    up_file_ftpserver(ftp_st.control_sock, remoteFileName, uploadFileName, 1, 0);
+    up_file_ftpserver(ftp_st.control_sock, remoteFileName, h264FileName, 1, 0);
     get_fsize_ftpserver(ftp_st.control_sock, remoteFileName);
 
 err0:
     quit_fpt_server(ftp_st.control_sock);
+
+    printf("**********************************************************\n");
+    printf("\n");
+    printf("\n");
+
+    // free(str);
 }

@@ -1,5 +1,6 @@
 /home/marc/my_project/1126_h264/build/CMakeFiles/ai_test.dir
 /home/marc/my_project/1126_h264/build/CMakeFiles/app.dir
 /home/marc/my_project/1126_h264/build/CMakeFiles/opencv_demo.dir
+/home/marc/my_project/1126_h264/build/CMakeFiles/uploader.dir
 /home/marc/my_project/1126_h264/build/CMakeFiles/edit_cache.dir
 /home/marc/my_project/1126_h264/build/CMakeFiles/rebuild_cache.dir

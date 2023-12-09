@@ -162,7 +162,9 @@ int bind_rgn_venc(void)
 
     // 创建venc通道，通道号为0
     // 30fps, 1920x1080
-    ret = create_venc_chn(u32ISPFps, u32ISPFps, VIDEO_WIDTH, VIDEO_HEIGHT, 0);
+    // ret = create_venc_chn(u32ISPFps, u32ISPFps, VIDEO_WIDTH, VIDEO_HEIGHT, 0);
+    ret = create_venc_chn(30, u32ISPFps, VIDEO_WIDTH, VIDEO_HEIGHT, 0);
+
     if (ret < 0)
     {
         printf("ERROR: create_venc_chn error%d\n", 0);

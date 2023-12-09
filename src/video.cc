@@ -10,7 +10,8 @@ extern int g_seconds_per_file;
 extern bool quit;
 extern pthread_mutex_t mp4_mutex;
 extern bool ifUploaderFileReady;
-char uploadFileName[128];
+char h264FileName[128];
+char fileNameBuf[128] = {0};
 
 static MPP_CHN_S stSrcChn;
 static MPP_CHN_S stDestChn;
@@ -22,13 +23,15 @@ RK_U32 u32ISPFps = 30;
 
 void create_new_video_file(void)
 {
-    char filename[128] = {0};
     // get_file_name_by_date_time(filename, "%s%lld.h264");
-    get_file_name_by_date_time(filename, "%lld.h264");
+    get_file_name_by_date_time(fileNameBuf, "%lld.h264");
     // sprintf(filename, "/userdata/video/%d.h264", g_file_number);
-    g_output_video_file = fopen(filename, "wb");
-
-    memcpy(uploadFileName, filename, strlen(filename));
+    g_output_video_file = fopen(fileNameBuf, "wb");
+    if (!g_output_video_file)
+    {
+        printf("ERROR: Create new h264 file: %s fail, exit\n", fileNameBuf);
+        return;
+    }
 }
 
 // venc之后的回调函数
@@ -42,8 +45,8 @@ void venc_video_packet_cb(MEDIA_BUFFER mb)
     {
         return;
     }
-    printf("#Get packet-%d, size %zu frameCounter :%d\n", packet_cnt, RK_MPI_MB_GetSize(mb), frameCounter);
-    pthread_mutex_lock(&mp4_mutex);
+    // printf("#Get packet-%d, size %zu frameCounter :%d\n", packet_cnt, RK_MPI_MB_GetSize(mb), frameCounter);
+    // pthread_mutex_lock(&mp4_mutex);
 
     if (frameCounter > u32ISPFps * g_seconds_per_file)
     {
@@ -53,6 +56,8 @@ void venc_video_packet_cb(MEDIA_BUFFER mb)
         fclose(g_output_video_file);
         g_output_video_file = NULL;
 
+        memcpy(h264FileName, fileNameBuf, strlen(fileNameBuf));
+        
         create_new_video_file();
 
         ifUploaderFileReady = true;
@@ -65,7 +70,7 @@ void venc_video_packet_cb(MEDIA_BUFFER mb)
     // 直接写入h264文件
     fwrite(RK_MPI_MB_GetPtr(mb), 1, RK_MPI_MB_GetSize(mb), g_output_video_file);
 
-    pthread_mutex_unlock(&mp4_mutex);
+    // pthread_mutex_unlock(&mp4_mutex);
     RK_MPI_MB_TsNodeDump(mb);
     RK_MPI_MB_ReleaseBuffer(mb);
 
@@ -108,8 +113,11 @@ void init_isp(void)
     // 初始化ISP
     SAMPLE_COMM_ISP_Init(s32CamId, RK_AIQ_WORKING_MODE_NORMAL, RK_FALSE, pIqfilesPath);
     SAMPLE_COMM_ISP_Run(s32CamId);
+
     // ISP的帧率设置
-    SAMPLE_COMM_ISP_SetFrameRate(s32CamId, u32ISPFps);
+    // SAMPLE_COMM_ISP_SetFrameRate(s32CamId, u32ISPFps);
+    SAMPLE_COMM_ISP_SetFrameRate(s32CamId, 30);
+
 }
 
 // 视频部分

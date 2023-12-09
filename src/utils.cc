@@ -89,7 +89,7 @@ int count_my_mp4_file_number(void)
     return total_number;
 }
 
-void get_file_name_by_date_time(char *file_name_buf, const char* filename)
+void get_file_name_by_date_time(char *file_name_buf, const char *filename)
 {
     time_t timep;
     struct tm *pLocalTime;
@@ -104,6 +104,8 @@ void get_file_name_by_date_time(char *file_name_buf, const char* filename)
                           (long long)(pLocalTime->tm_hour) * 10000 +
                           (long long)(pLocalTime->tm_min) * 100 +
                           (long long)(pLocalTime->tm_sec);
+
+    // time_long = time_long - 20000000000000;
 
     // sprintf(file_name_buf, filename, VIDEO_FOLDER, time_long);
     sprintf(file_name_buf, filename, time_long);

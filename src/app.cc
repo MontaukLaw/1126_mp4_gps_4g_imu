@@ -8,8 +8,9 @@ bool quit = false;
 FILE *g_output_video_file;
 // 文件数量
 int g_file_number = 1;
+
 // 每个文件的时长
-int g_seconds_per_file = 100;
+RK_U32 g_seconds_per_file = 100;
 
 bool ifUpload = false;
 

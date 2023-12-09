@@ -66,6 +66,7 @@ CMAKE_BINARY_DIR = /home/marc/my_project/1126_h264/build
 all: CMakeFiles/ai_test.dir/all
 all: CMakeFiles/app.dir/all
 all: CMakeFiles/opencv_demo.dir/all
+all: CMakeFiles/uploader.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -76,6 +77,7 @@ preinstall:
 clean: CMakeFiles/ai_test.dir/clean
 clean: CMakeFiles/app.dir/clean
 clean: CMakeFiles/opencv_demo.dir/clean
+clean: CMakeFiles/uploader.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -155,6 +157,32 @@ opencv_demo: CMakeFiles/opencv_demo.dir/rule
 CMakeFiles/opencv_demo.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_demo.dir/build.make CMakeFiles/opencv_demo.dir/clean
 .PHONY : CMakeFiles/opencv_demo.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/uploader.dir
+
+# All Build rule for target.
+CMakeFiles/uploader.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/marc/my_project/1126_h264/build/CMakeFiles --progress-num=16,17,18,19,20 "Built target uploader"
+.PHONY : CMakeFiles/uploader.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/uploader.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_h264/build/CMakeFiles 5
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/uploader.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_h264/build/CMakeFiles 0
+.PHONY : CMakeFiles/uploader.dir/rule
+
+# Convenience name for target.
+uploader: CMakeFiles/uploader.dir/rule
+.PHONY : uploader
+
+# clean rule for target.
+CMakeFiles/uploader.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uploader.dir/build.make CMakeFiles/uploader.dir/clean
+.PHONY : CMakeFiles/uploader.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
