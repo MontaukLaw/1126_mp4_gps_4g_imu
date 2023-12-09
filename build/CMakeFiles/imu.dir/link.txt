@@ -1,1 +1,0 @@
-/opt/atk-dlrv1126-toolchain/usr/bin/arm-linux-gnueabihf-g++ --sysroot=/opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot CMakeFiles/imu.dir/src/imu_test.cpp.o -o imu   -L/home/marc/my_project/1126_mp4/include  -L/home/marc/my_project/1126_mp4/lib 

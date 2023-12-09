@@ -10,6 +10,8 @@ extern bool quit;
 extern int recordingVideo;
 extern pthread_mutex_t mp4_mutex;
 
+extern FILE *g_output_audio_file;
+
 static MPP_CHN_S mpp_chn_ai, mpp_chn_aenc;
 static CODEC_TYPE_E code_type = RK_CODEC_TYPE_MP2; // RK_CODEC_TYPE_MP2;
 
@@ -28,6 +30,13 @@ typedef struct FreqIdx_
 } FreqIdx;
 
 FreqIdx FreqIdxTbl[13] = {{96000, 0}, {88200, 1}, {64000, 2}, {48000, 3}, {44100, 4}, {32000, 5}, {24000, 6}, {22050, 7}, {16000, 8}, {12000, 9}, {11025, 10}, {8000, 11}, {7350, 12}};
+
+void create_audio_file(void)
+{
+    char filename[128] = {0};
+    get_file_name_by_date_time(filename, "%s%lld.mp3");
+    g_output_audio_file = fopen(filename, "wb");
+}
 
 static void GetHeader(RK_U8 *pu8Hdr, RK_S32 u32SmpRate, RK_U8 u8Channel, RK_U32 u32DataLen)
 {
@@ -58,7 +67,56 @@ static int64_t getCurrentTimeUs(void)
     return tv.tv_sec * 1000000 + tv.tv_usec;
 }
 
+
 static void *GetAudioMediaBuffer(void *params)
+{
+    AudioParams *pstAudioParams = (AudioParams *)params;
+    RK_U8 header[7];
+    MEDIA_BUFFER mb = NULL;
+    int cnt = 0;
+    // FILE *save_file = NULL;
+
+    // printf("#Start %s thread, SampleRate:%u, Channel:%u, Fmt:%x, Path:%s\n",
+    //        __func__, pstAudioParams->u32SampleRate, pstAudioParams->u32ChnCnt,
+    //        pstAudioParams->enSampleFmt, pstAudioParams->pOutPath);
+
+    while (!quit) 
+    {
+        mb = RK_MPI_SYS_GetMediaBuffer(RK_ID_AENC, 0, -1);
+        if (!mb)
+        {
+            printf("RK_MPI_SYS_GetMediaBuffer get null buffer!\n");
+            break;
+        }
+
+#if 1
+        printf("#%d Get Frame:ptr:%p, size:%zu, mode:%d, channel:%d, "
+               "timestamp:%lld\n",
+               cnt++, RK_MPI_MB_GetPtr(mb), RK_MPI_MB_GetSize(mb),
+               RK_MPI_MB_GetModeID(mb), RK_MPI_MB_GetChannelID(mb),
+               RK_MPI_MB_GetTimestamp(mb));
+#endif
+
+        if (g_output_audio_file)
+        {
+            if (code_type == RK_CODEC_TYPE_MP3)
+            {
+                GetHeader(header, pstAudioParams->u32SampleRate,
+                          pstAudioParams->u32ChnCnt, RK_MPI_MB_GetSize(mb));
+                fwrite(header, 1, 7, g_output_audio_file);
+            }
+            fwrite(RK_MPI_MB_GetPtr(mb), 1, RK_MPI_MB_GetSize(mb), g_output_audio_file);
+        }
+        RK_MPI_MB_ReleaseBuffer(mb);
+    }
+
+    if (g_output_audio_file)
+        fclose(g_output_audio_file);
+
+    return NULL;
+}
+
+static void *GetAudioMediaBuffer__(void *params)
 {
     AudioParams *pstAudioParams = (AudioParams *)params;
     RK_U8 header[7];
@@ -68,16 +126,16 @@ static void *GetAudioMediaBuffer(void *params)
     int64_t temp_us = 0;
     static int64_t elapse_us = 0;
 
-    printf("#Start %s thread, SampleRate:%u, Channel:%u, Fmt:%x, Path:%s\n",
-           __func__, pstAudioParams->u32SampleRate, pstAudioParams->u32ChnCnt,
-           pstAudioParams->enSampleFmt, pstAudioParams->pOutPath);
+    // printf("#Start %s thread, SampleRate:%u, Channel:%u, Fmt:%x, Path:%s\n",
+    //        __func__, pstAudioParams->u32SampleRate, pstAudioParams->u32ChnCnt,
+    //        pstAudioParams->enSampleFmt, pstAudioParams->pOutPath);
 
-    if (pstAudioParams->pOutPath)
-    {
-        save_file = fopen(pstAudioParams->pOutPath, "w");
-        if (!save_file)
-            printf("ERROR: Open %s failed!\n", pstAudioParams->pOutPath);
-    }
+    // if (pstAudioParams->pOutPath)
+    // {
+    //     save_file = fopen(pstAudioParams->pOutPath, "w");
+    //     if (!save_file)
+    //         printf("ERROR: Open %s failed!\n", pstAudioParams->pOutPath);
+    // }
 
     while (!quit)
     {
@@ -87,14 +145,17 @@ static void *GetAudioMediaBuffer(void *params)
             printf("RK_MPI_SYS_GetMediaBuffer get null buffer!\n");
             break;
         }
+        
 #if DEBUG_INFO
+
         printf("#%d Get Frame:ptr:%p, size:%zu, mode:%d, channel:%d, "
                "timestamp:%lld\n",
                cnt++, RK_MPI_MB_GetPtr(mb), RK_MPI_MB_GetSize(mb),
                RK_MPI_MB_GetModeID(mb), RK_MPI_MB_GetChannelID(mb),
                RK_MPI_MB_GetTimestamp(mb));
 #endif
-        if (recordingVideo)
+        // if (recordingVideo)
+        if (0)
         {
             temp_us = getCurrentTimeUs();
 
@@ -109,15 +170,21 @@ static void *GetAudioMediaBuffer(void *params)
             pthread_mutex_unlock(&mp4_mutex);
         }
 
-        // if (save_file)
-        // {
-        //     if (code_type == RK_CODEC_TYPE_MP3)
-        //     {
-        //         GetHeader(header, pstAudioParams->u32SampleRate, pstAudioParams->u32ChnCnt, RK_MPI_MB_GetSize(mb));
-        //         fwrite(header, 1, 7, save_file);
-        //     }
-        //     fwrite(RK_MPI_MB_GetPtr(mb), 1, RK_MPI_MB_GetSize(mb), save_file);
-        // }
+        if (g_output_audio_file)
+        {
+            printf("#%d Get Audio Frame:ptr:%p, size:%zu, mode:%d, channel:%d, "
+                   "timestamp:%lld\n",
+                   cnt++, RK_MPI_MB_GetPtr(mb), RK_MPI_MB_GetSize(mb),
+                   RK_MPI_MB_GetModeID(mb), RK_MPI_MB_GetChannelID(mb),
+                   RK_MPI_MB_GetTimestamp(mb));
+
+            if (code_type == RK_CODEC_TYPE_MP3)
+            {
+                GetHeader(header, pstAudioParams->u32SampleRate, pstAudioParams->u32ChnCnt, RK_MPI_MB_GetSize(mb));
+                fwrite(header, 1, 7, save_file);
+            }
+            fwrite(RK_MPI_MB_GetPtr(mb), 1, RK_MPI_MB_GetSize(mb), save_file);
+        }
 
         RK_MPI_MB_ReleaseBuffer(mb);
     }
@@ -138,17 +205,17 @@ int init_audio(void)
     SAMPLE_FORMAT_E enSampleFmt = RK_SAMPLE_FMT_S16;
     // default:CARD=rockchiprk809co
     RK_CHAR *pDeviceName = "default";
-    RK_CHAR *pOutPath = "aenc.mp3";
+    RK_CHAR *pOutPath = "aenc1209.mp3";
     int ret = 0;
 
-    printf("#Device: %s\n", pDeviceName);
-    printf("#SampleRate: %d\n", u32SampleRate);
-    printf("#Channel Count: %d\n", u32ChnCnt);
-    printf("#Frame Count: %d\n", u32FrameCnt);
-    printf("#BitRate: %d\n", u32BitRate);
-    printf("#SampleFmt: %d\n", enSampleFmt);
-    printf("#Output Path: %s\n", pOutPath);
-    printf("#code_type: %d\n", code_type);
+    printf("# Device: %s\n", pDeviceName);
+    printf("# SampleRate: %d\n", u32SampleRate);
+    printf("# Channel Count: %d\n", u32ChnCnt);
+    printf("# Frame Count: %d\n", u32FrameCnt);
+    printf("# BitRate: %d\n", u32BitRate);
+    printf("# SampleFmt: %d\n", enSampleFmt);
+    printf("# Output Path: %s\n", pOutPath);
+    printf("# code_type: %d\n", code_type);
 
     AudioParams stAudioParams;
     stAudioParams.u32SampleRate = u32SampleRate;

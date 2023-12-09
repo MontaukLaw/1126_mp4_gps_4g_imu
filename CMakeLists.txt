@@ -12,7 +12,6 @@ set(CMAKE_CXX_STANDARD 11)
 add_definitions(-g -O0 -ggdb -gdwarf -funwind-tables -rdynamic)
 add_definitions(-Wno-write-strings -Wno-return-type)
 
-set(OPENCV_LIBS opencv_core opencv_imgcodecs opencv_imgproc opencv_features2d opencv_flann opencv_highgui opencv_freetype)
 set(RKNN_LIBS easymedia rga rkaiq rknn_api sample_common_isp)
 set(MP4_LIBS mp4v2)
 link_directories(include lib)
@@ -53,10 +52,19 @@ add_executable(app src/app.cc
                    src/audio.cc 
                    src/mp4_codec_process.cc
                    src/utils.cc
-                   src/imu_test.cpp)
+                   src/imu_test.cpp
+                   src/vi_rga_venc.cc
+                   src/uploader.cc
+                   src/simple_ftp_uploader.cc)
 
-target_link_libraries(app ${OPENCV_LIBS} ${RKNN_LIBS} pthread dl ${THIRD_MEDIA} ${MP4_LIBS})
+target_link_libraries(app ${RKNN_LIBS} pthread dl ${THIRD_MEDIA} ${MP4_LIBS})
 target_include_directories(app PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # app
 # add_executable(imu src/imu_test.cpp)
+
+set(OPENCV_LIBS opencv_core opencv_imgcodecs opencv_imgproc opencv_features2d opencv_flann opencv_highgui opencv_freetype)
+# opencv
+add_executable(opencv_demo src/cv_demo.cc)
+include_directories(opencv_demo ${CMAKE_SOURCE_DIR}/opencv/include)
+target_link_libraries(opencv_demo ${OPENCV_LIBS})

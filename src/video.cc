@@ -3,35 +3,67 @@
 
 // 文件数量
 extern int g_file_number;
-extern FILE *g_output_file;
+extern FILE *g_output_video_file;
+
 // 每个文件的时长
 extern int g_seconds_per_file;
 extern bool quit;
 extern pthread_mutex_t mp4_mutex;
+extern bool ifUploaderFileReady;
+char uploadFileName[128];
 
 static MPP_CHN_S stSrcChn;
 static MPP_CHN_S stDestChn;
 static RK_S32 s32CamId = 0;
 static RK_CHAR *pIqfilesPath = "/oem/etc/iqfiles";
 
-// venc之后的回调函数
-void video_packet_cb(MEDIA_BUFFER mb)
+// FPS
+RK_U32 u32ISPFps = 30;
+
+void create_new_video_file(void)
 {
+    char filename[128] = {0};
+    // get_file_name_by_date_time(filename, "%s%lld.h264");
+    get_file_name_by_date_time(filename, "%s.h264");
+    // sprintf(filename, "/userdata/video/%d.h264", g_file_number);
+    g_output_video_file = fopen(filename, "wb");
+
+    memcpy(uploadFileName, filename, strlen(filename));
+}
+
+// venc之后的回调函数
+void venc_video_packet_cb(MEDIA_BUFFER mb)
+{
+    static RK_S32 frameCounter = 0;
     static RK_S32 packet_cnt = 0;
 
+    frameCounter++;
     if (quit)
     {
         return;
     }
-    // printf("#Get packet-%d, size %zu\n", packet_cnt, RK_MPI_MB_GetSize(mb));
+    printf("#Get packet-%d, size %zu frameCounter :%d\n", packet_cnt, RK_MPI_MB_GetSize(mb), frameCounter);
     pthread_mutex_lock(&mp4_mutex);
 
-    RK_S32 frameType = RK_MPI_MB_GetFlag(mb);
+    if (frameCounter > u32ISPFps * g_seconds_per_file)
+    {
+        printf("frameCounter:%d, u32ISPFps:%d, g_seconds_per_file:%d\n", frameCounter, u32ISPFps, g_seconds_per_file);
+        frameCounter = 0;
+        packet_cnt = 0;
+        fclose(g_output_video_file);
+        g_output_video_file = NULL;
+
+        create_new_video_file();
+
+        ifUploaderFileReady = true;
+        // g_file_number++;
+    }
+    // RK_S32 frameType = RK_MPI_MB_GetFlag(mb);
     // printf("#Get packet type: %d, size %zu\n", frameType, RK_MPI_MB_GetSize(mb));
 
-    record_mp4(mb);
+    // record_mp4(mb);
     // 直接写入h264文件
-    // fwrite(RK_MPI_MB_GetPtr(mb), 1, RK_MPI_MB_GetSize(mb), g_output_file);
+    fwrite(RK_MPI_MB_GetPtr(mb), 1, RK_MPI_MB_GetSize(mb), g_output_video_file);
 
     pthread_mutex_unlock(&mp4_mutex);
     RK_MPI_MB_TsNodeDump(mb);
@@ -40,7 +72,64 @@ void video_packet_cb(MEDIA_BUFFER mb)
     packet_cnt++;
 }
 
+void init_vi(void)
+{
+
+    int ret = 0;
+    // 视频宽高
+    RK_U32 u32Width = 1920;
+    RK_U32 u32Height = 1080;
+
+    // 摄像头设备名
+    RK_CHAR *pDeviceName = "rkispp_scale0";
+    // 缓冲块数量
+    RK_U32 u32BufCnt = 3;
+    // 简单初始化vi
+    VI_CHN_ATTR_S vi_chn_attr;
+    vi_chn_attr.pcVideoNode = pDeviceName;
+    vi_chn_attr.u32BufCnt = u32BufCnt;
+    vi_chn_attr.u32Width = u32Width;
+    vi_chn_attr.u32Height = u32Height;
+    vi_chn_attr.enPixFmt = IMAGE_TYPE_NV12;
+    vi_chn_attr.enBufType = VI_CHN_BUF_TYPE_MMAP;
+    vi_chn_attr.enWorkMode = VI_WORK_MODE_NORMAL;
+    ret = RK_MPI_VI_SetChnAttr(s32CamId, 0, &vi_chn_attr);
+    ret |= RK_MPI_VI_EnableChn(s32CamId, 0);
+    if (ret)
+    {
+        printf("ERROR: create VI[0] error! ret=%d\n", ret);
+        return;
+    }
+}
+
+void init_isp(void)
+{
+
+    // 初始化ISP
+    SAMPLE_COMM_ISP_Init(s32CamId, RK_AIQ_WORKING_MODE_NORMAL, RK_FALSE, pIqfilesPath);
+    SAMPLE_COMM_ISP_Run(s32CamId);
+    // ISP的帧率设置
+    SAMPLE_COMM_ISP_SetFrameRate(s32CamId, u32ISPFps);
+}
+
+// 视频部分
 int vi_venc(void)
+{
+    // 初始化isp
+    init_isp();
+
+    // 系统初始化
+    RK_MPI_SYS_Init();
+
+    // 简单初始化vi
+    init_vi();
+
+    // 绑定rga跟venc
+    bind_rgn_venc();
+}
+
+#if 0
+int vi_venc__(void)
 {
     RK_U32 u32Width = 1920;
     RK_U32 u32Height = 1080;
@@ -124,7 +213,7 @@ int vi_venc(void)
     stEncChn.enModId = RK_ID_VENC;
     stEncChn.s32DevId = 0;
     stEncChn.s32ChnId = 0;
-    ret = RK_MPI_SYS_RegisterOutCb(&stEncChn, video_packet_cb);
+    ret = RK_MPI_SYS_RegisterOutCb(&stEncChn, venc_video_packet_cb);
     if (ret)
     {
         printf("ERROR: register output callback for VENC[0] error! ret=%d\n", ret);
@@ -148,6 +237,7 @@ int vi_venc(void)
 
     return 0;
 }
+#endif
 
 int clean_job(void)
 {

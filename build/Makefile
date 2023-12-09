@@ -57,10 +57,10 @@ RM = /opt/cmake/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/marc/my_project/1126_mp4
+CMAKE_SOURCE_DIR = /home/marc/my_project/1126_h264
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/marc/my_project/1126_mp4/build
+CMAKE_BINARY_DIR = /home/marc/my_project/1126_h264/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_mp4/build/CMakeFiles /home/marc/my_project/1126_mp4/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_h264/build/CMakeFiles /home/marc/my_project/1126_h264/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_mp4/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_h264/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -142,6 +142,19 @@ app/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
 .PHONY : app/fast
 
+#=============================================================================
+# Target rules for targets named opencv_demo
+
+# Build rule for target.
+opencv_demo: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 opencv_demo
+.PHONY : opencv_demo
+
+# fast build rule for target.
+opencv_demo/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_demo.dir/build.make CMakeFiles/opencv_demo.dir/build
+.PHONY : opencv_demo/fast
+
 src/app.o: src/app.cc.o
 .PHONY : src/app.o
 
@@ -189,6 +202,30 @@ src/audio.s: src/audio.cc.s
 src/audio.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/audio.cc.s
 .PHONY : src/audio.cc.s
+
+src/cv_demo.o: src/cv_demo.cc.o
+.PHONY : src/cv_demo.o
+
+# target to build an object file
+src/cv_demo.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_demo.dir/build.make CMakeFiles/opencv_demo.dir/src/cv_demo.cc.o
+.PHONY : src/cv_demo.cc.o
+
+src/cv_demo.i: src/cv_demo.cc.i
+.PHONY : src/cv_demo.i
+
+# target to preprocess a source file
+src/cv_demo.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_demo.dir/build.make CMakeFiles/opencv_demo.dir/src/cv_demo.cc.i
+.PHONY : src/cv_demo.cc.i
+
+src/cv_demo.s: src/cv_demo.cc.s
+.PHONY : src/cv_demo.s
+
+# target to generate assembly for a file
+src/cv_demo.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_demo.dir/build.make CMakeFiles/opencv_demo.dir/src/cv_demo.cc.s
+.PHONY : src/cv_demo.cc.s
 
 src/imu_test.o: src/imu_test.cpp.o
 .PHONY : src/imu_test.o
@@ -262,6 +299,54 @@ src/sample_common_isp.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/sample_common_isp.cc.s
 .PHONY : src/sample_common_isp.cc.s
 
+src/simple_ftp_uploader.o: src/simple_ftp_uploader.cc.o
+.PHONY : src/simple_ftp_uploader.o
+
+# target to build an object file
+src/simple_ftp_uploader.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/simple_ftp_uploader.cc.o
+.PHONY : src/simple_ftp_uploader.cc.o
+
+src/simple_ftp_uploader.i: src/simple_ftp_uploader.cc.i
+.PHONY : src/simple_ftp_uploader.i
+
+# target to preprocess a source file
+src/simple_ftp_uploader.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/simple_ftp_uploader.cc.i
+.PHONY : src/simple_ftp_uploader.cc.i
+
+src/simple_ftp_uploader.s: src/simple_ftp_uploader.cc.s
+.PHONY : src/simple_ftp_uploader.s
+
+# target to generate assembly for a file
+src/simple_ftp_uploader.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/simple_ftp_uploader.cc.s
+.PHONY : src/simple_ftp_uploader.cc.s
+
+src/uploader.o: src/uploader.cc.o
+.PHONY : src/uploader.o
+
+# target to build an object file
+src/uploader.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/uploader.cc.o
+.PHONY : src/uploader.cc.o
+
+src/uploader.i: src/uploader.cc.i
+.PHONY : src/uploader.i
+
+# target to preprocess a source file
+src/uploader.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/uploader.cc.i
+.PHONY : src/uploader.cc.i
+
+src/uploader.s: src/uploader.cc.s
+.PHONY : src/uploader.s
+
+# target to generate assembly for a file
+src/uploader.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/uploader.cc.s
+.PHONY : src/uploader.cc.s
+
 src/utils.o: src/utils.cc.o
 .PHONY : src/utils.o
 
@@ -285,6 +370,30 @@ src/utils.s: src/utils.cc.s
 src/utils.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/utils.cc.s
 .PHONY : src/utils.cc.s
+
+src/vi_rga_venc.o: src/vi_rga_venc.cc.o
+.PHONY : src/vi_rga_venc.o
+
+# target to build an object file
+src/vi_rga_venc.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/vi_rga_venc.cc.o
+.PHONY : src/vi_rga_venc.cc.o
+
+src/vi_rga_venc.i: src/vi_rga_venc.cc.i
+.PHONY : src/vi_rga_venc.i
+
+# target to preprocess a source file
+src/vi_rga_venc.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/vi_rga_venc.cc.i
+.PHONY : src/vi_rga_venc.cc.i
+
+src/vi_rga_venc.s: src/vi_rga_venc.cc.s
+.PHONY : src/vi_rga_venc.s
+
+# target to generate assembly for a file
+src/vi_rga_venc.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/vi_rga_venc.cc.s
+.PHONY : src/vi_rga_venc.cc.s
 
 src/video.o: src/video.cc.o
 .PHONY : src/video.o
@@ -344,12 +453,16 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... ai_test"
 	@echo "... app"
+	@echo "... opencv_demo"
 	@echo "... src/app.o"
 	@echo "... src/app.i"
 	@echo "... src/app.s"
 	@echo "... src/audio.o"
 	@echo "... src/audio.i"
 	@echo "... src/audio.s"
+	@echo "... src/cv_demo.o"
+	@echo "... src/cv_demo.i"
+	@echo "... src/cv_demo.s"
 	@echo "... src/imu_test.o"
 	@echo "... src/imu_test.i"
 	@echo "... src/imu_test.s"
@@ -359,9 +472,18 @@ help:
 	@echo "... src/sample_common_isp.o"
 	@echo "... src/sample_common_isp.i"
 	@echo "... src/sample_common_isp.s"
+	@echo "... src/simple_ftp_uploader.o"
+	@echo "... src/simple_ftp_uploader.i"
+	@echo "... src/simple_ftp_uploader.s"
+	@echo "... src/uploader.o"
+	@echo "... src/uploader.i"
+	@echo "... src/uploader.s"
 	@echo "... src/utils.o"
 	@echo "... src/utils.i"
 	@echo "... src/utils.s"
+	@echo "... src/vi_rga_venc.o"
+	@echo "... src/vi_rga_venc.i"
+	@echo "... src/vi_rga_venc.s"
 	@echo "... src/video.o"
 	@echo "... src/video.i"
 	@echo "... src/video.s"

@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Oct 26 12:47:34 2023
+# Make data base, printed on Fri Nov 17 20:15:24 2023
 
 # Variables
 
@@ -53,15 +53,15 @@ LC_NAME = en_HK.UTF-8
 # environment
 VSCODE_CWD = /home/marc
 # environment
-SSH_CONNECTION = 192.168.1.2 57959 192.168.1.88 22
+SSH_CONNECTION = 192.168.1.2 54425 192.168.1.88 22
 # environment
-PATH = /home/marc/.vscode-server/bin/f1b07bd25dfad64b0167beb15359ae573aecd2cc/bin/remote-cli:/home/marc/rv1106/toolchain/env/arm-rockchip830-linux-uclibcgnueabihf/bin:/opt/hisi-linux/x86-arm/arm-himix200-linux/bin:/opt/cmake/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/marc/esp/xtensa-lx106-elf/bin
+PATH = /home/marc/.vscode-server/bin/1a5daa3a0231a0fbba4f14db7ec463cf99d7768e/bin/remote-cli:/home/marc/rv1106/toolchain/env/arm-rockchip830-linux-uclibcgnueabihf/bin:/opt/hisi-linux/x86-arm/arm-himix200-linux/bin:/opt/cmake/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/marc/esp/xtensa-lx106-elf/bin
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /run/user/1000/vscode-ipc-2d7f676b-91eb-45ae-b2f1-7196605a5313.sock
+VSCODE_IPC_HOOK_CLI = /run/user/1000/vscode-ipc-a91e6b57-f6ae-4e6a-b575-2f5e7517c896.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # automatic
@@ -95,7 +95,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 1
 # environment
-XDG_SESSION_ID = 3
+XDG_SESSION_ID = 94
 # environment
 USER = marc
 # environment
@@ -119,13 +119,13 @@ MAKEFLAGS = pqrR
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_CLIENT = 192.168.1.2 57959 22
+SSH_CLIENT = 192.168.1.2 54425 22
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
 LC_PAPER = en_HK.UTF-8
 # environment
-BROWSER = /home/marc/.vscode-server/bin/f1b07bd25dfad64b0167beb15359ae573aecd2cc/bin/helpers/browser.sh
+BROWSER = /home/marc/.vscode-server/bin/1a5daa3a0231a0fbba4f14db7ec463cf99d7768e/bin/helpers/browser.sh
 # environment
 VSCODE_HANDLES_SIGPIPE = true
 # default
@@ -165,9 +165,9 @@ MOTD_SHOWN = pam
 
 # Directories
 
-# . (device 66306, inode 13259175): 12 files, no impossibilities.
+# . (device 66306, inode 13259175): 17 files, no impossibilities.
 
-# 12 files, no impossibilities in 1 directories.
+# 17 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -217,13 +217,13 @@ GNUmakefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 20 / storage = 175 B / avg = 8 B
-# current buf: size = 8162 B / used = 175 B / count = 20 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 25 / storage = 216 B / avg = 8 B
+# current buf: size = 8162 B / used = 216 B / count = 25 / avg = 8 B
 
-# strcache performance: lookups = 23 / hit rate = 13%
+# strcache performance: lookups = 28 / hit rate = 10%
 # hash-table stats:
-# Load=20/8192=0%, Rehash=0, Collisions=1/23=4%
-# Finished Make data base on Thu Oct 26 12:47:34 2023
+# Load=25/8192=0%, Rehash=0, Collisions=1/28=4%
+# Finished Make data base on Fri Nov 17 20:15:24 2023
 
  
 make: *** No rule to make target 'all'.  Stop.

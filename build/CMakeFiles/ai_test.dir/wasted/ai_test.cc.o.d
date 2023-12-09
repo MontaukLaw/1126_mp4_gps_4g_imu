@@ -1,5 +1,5 @@
 CMakeFiles/ai_test.dir/wasted/ai_test.cc.o: \
- /home/marc/my_project/1126_mp4/wasted/ai_test.cc \
+ /home/marc/my_project/1126_h264/wasted/ai_test.cc \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/stdc-predef.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/assert.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/features.h \

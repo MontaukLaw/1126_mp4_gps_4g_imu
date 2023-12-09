@@ -92,7 +92,7 @@ static void *GetAudioMediaBuffer(void *params)
             break;
         }
 
-#if DEBUG_INFO
+#if 1
         printf("#%d Get Frame:ptr:%p, size:%zu, mode:%d, channel:%d, "
                "timestamp:%lld\n",
                cnt++, RK_MPI_MB_GetPtr(mb), RK_MPI_MB_GetSize(mb),
@@ -133,14 +133,14 @@ int main(int argc, char *argv[])
     int ret = 0;
     int c;
 
-    printf("#Device: %s\n", pDeviceName);
-    printf("#SampleRate: %d\n", u32SampleRate);
-    printf("#Channel Count: %d\n", u32ChnCnt);
-    printf("#Frame Count: %d\n", u32FrameCnt);
-    printf("#BitRate: %d\n", u32BitRate);
-    printf("#SampleFmt: %d\n", enSampleFmt);
-    printf("#Output Path: %s\n", pOutPath);
-    printf("#code_type: %d\n", code_type);
+    printf("# Device: %s\n", pDeviceName);
+    printf("# SampleRate: %d\n", u32SampleRate);
+    printf("# Channel Count: %d\n", u32ChnCnt);
+    printf("# Frame Count: %d\n", u32FrameCnt);
+    printf("# BitRate: %d\n", u32BitRate);
+    printf("# SampleFmt: %d\n", enSampleFmt);
+    printf("# Output Path: %s\n", pOutPath);
+    printf("# code_type: %d\n", code_type);
 
     AudioParams stAudioParams;
     stAudioParams.u32SampleRate = u32SampleRate;

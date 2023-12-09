@@ -63,6 +63,11 @@ extern "C"
 #define SPS_FRAME_LEN 26
 #define PPS_FRAME_LEN 4
 #define FRAME_START_FLAG_LEN 4
+#define VIDEO_WIDTH 1920
+#define VIDEO_HEIGHT 1080
+
+#define CV_RGN_CHN 1
+#define VENC_RGN_CHN 0
 
     int vi_venc(void);
 
@@ -85,8 +90,19 @@ extern "C"
     int init_audio(void);
 
     void *imu_process(void *param);
-    
+
     // void start_imu_process(void);
+    void venc_video_packet_cb(MEDIA_BUFFER mb);
+
+    void create_cv_thread(void);
+
+    int bind_rgn_venc(void);
+
+    void get_file_name_by_date_time(char *file_name_buf, const char *filename);
+
+    void create_new_video_file(void);
+
+    void create_audio_file(void);
 
 #ifdef __cplusplus
 }

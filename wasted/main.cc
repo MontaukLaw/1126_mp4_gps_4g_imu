@@ -15,7 +15,7 @@
 #include "rkmedia_venc.h"
 
 static bool quit = false;
-static FILE *g_output_file;
+static FILE *g_output_video_file;
 
 static RK_S32 g_s32FrameCnt = -1;
 
@@ -46,9 +46,9 @@ void video_packet_cb(MEDIA_BUFFER mb)
         break;
     }
 
-    if (g_output_file)
+    if (g_output_video_file)
     {
-        fwrite(RK_MPI_MB_GetPtr(mb), 1, RK_MPI_MB_GetSize(mb), g_output_file);
+        fwrite(RK_MPI_MB_GetPtr(mb), 1, RK_MPI_MB_GetSize(mb), g_output_video_file);
         printf("#Write packet-%d, %s, size %zu\n", packet_cnt, nalu_type, RK_MPI_MB_GetSize(mb));
     }
     else
@@ -89,8 +89,8 @@ int main(int argc, char *argv[])
     // 获取文件写入句柄
     if (pOutPath)
     {
-        g_output_file = fopen(pOutPath, "w");
-        if (!g_output_file)
+        g_output_video_file = fopen(pOutPath, "w");
+        if (!g_output_video_file)
         {
             printf("ERROR: open file: %s fail, exit\n", pOutPath);
             return 0;
@@ -178,9 +178,9 @@ int main(int argc, char *argv[])
         usleep(500000);
     }
 
-    if (g_output_file)
+    if (g_output_video_file)
     {
-        fclose(g_output_file);
+        fclose(g_output_video_file);
     }
 
     // 扫尾工作

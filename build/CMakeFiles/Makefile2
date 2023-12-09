@@ -54,10 +54,10 @@ RM = /opt/cmake/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/marc/my_project/1126_mp4
+CMAKE_SOURCE_DIR = /home/marc/my_project/1126_h264
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/marc/my_project/1126_mp4/build
+CMAKE_BINARY_DIR = /home/marc/my_project/1126_h264/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -65,6 +65,7 @@ CMAKE_BINARY_DIR = /home/marc/my_project/1126_mp4/build
 # The main recursive "all" target.
 all: CMakeFiles/ai_test.dir/all
 all: CMakeFiles/app.dir/all
+all: CMakeFiles/opencv_demo.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -74,6 +75,7 @@ preinstall:
 # The main recursive "clean" target.
 clean: CMakeFiles/ai_test.dir/clean
 clean: CMakeFiles/app.dir/clean
+clean: CMakeFiles/opencv_demo.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -83,14 +85,14 @@ clean: CMakeFiles/app.dir/clean
 CMakeFiles/ai_test.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ai_test.dir/build.make CMakeFiles/ai_test.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ai_test.dir/build.make CMakeFiles/ai_test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/marc/my_project/1126_mp4/build/CMakeFiles --progress-num=1,2 "Built target ai_test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/marc/my_project/1126_h264/build/CMakeFiles --progress-num=1,2 "Built target ai_test"
 .PHONY : CMakeFiles/ai_test.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ai_test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_mp4/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_h264/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/ai_test.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_mp4/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_h264/build/CMakeFiles 0
 .PHONY : CMakeFiles/ai_test.dir/rule
 
 # Convenience name for target.
@@ -109,14 +111,14 @@ CMakeFiles/ai_test.dir/clean:
 CMakeFiles/app.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/marc/my_project/1126_mp4/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10 "Built target app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/marc/my_project/1126_h264/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12,13 "Built target app"
 .PHONY : CMakeFiles/app.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/app.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_mp4/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_h264/build/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/app.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_mp4/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_h264/build/CMakeFiles 0
 .PHONY : CMakeFiles/app.dir/rule
 
 # Convenience name for target.
@@ -127,6 +129,32 @@ app: CMakeFiles/app.dir/rule
 CMakeFiles/app.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/clean
 .PHONY : CMakeFiles/app.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/opencv_demo.dir
+
+# All Build rule for target.
+CMakeFiles/opencv_demo.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_demo.dir/build.make CMakeFiles/opencv_demo.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_demo.dir/build.make CMakeFiles/opencv_demo.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/marc/my_project/1126_h264/build/CMakeFiles --progress-num=14,15 "Built target opencv_demo"
+.PHONY : CMakeFiles/opencv_demo.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/opencv_demo.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_h264/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/opencv_demo.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marc/my_project/1126_h264/build/CMakeFiles 0
+.PHONY : CMakeFiles/opencv_demo.dir/rule
+
+# Convenience name for target.
+opencv_demo: CMakeFiles/opencv_demo.dir/rule
+.PHONY : opencv_demo
+
+# clean rule for target.
+CMakeFiles/opencv_demo.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/opencv_demo.dir/build.make CMakeFiles/opencv_demo.dir/clean
+.PHONY : CMakeFiles/opencv_demo.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

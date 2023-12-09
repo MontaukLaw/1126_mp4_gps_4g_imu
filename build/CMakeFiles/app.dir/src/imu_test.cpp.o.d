@@ -1,7 +1,7 @@
 CMakeFiles/app.dir/src/imu_test.cpp.o: \
- /home/marc/my_project/1126_mp4/src/imu_test.cpp \
+ /home/marc/my_project/1126_h264/src/imu_test.cpp \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/stdc-predef.h \
- /home/marc/my_project/1126_mp4/./include/app_comm.h \
+ /home/marc/my_project/1126_h264/./include/app_comm.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/assert.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/features.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/sys/cdefs.h \
@@ -151,7 +151,7 @@ CMakeFiles/app.dir/src/imu_test.cpp.o: \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/posix1_lim.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/bits/local_lim.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/linux/limits.h \
- /home/marc/my_project/1126_mp4/./include/sample_common.h \
+ /home/marc/my_project/1126_h264/./include/sample_common.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/easymedia/rkmedia_common.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/rkaiq/uAPI/rk_aiq_user_api_imgproc.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/rkaiq/xcore/base/xcam_common.h \
@@ -300,17 +300,17 @@ CMakeFiles/app.dir/src/imu_test.cpp.o: \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/easymedia/rkmedia_vmix.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/easymedia/rkmedia_vo.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/easymedia/rkmedia_venc.h \
- /home/marc/my_project/1126_mp4/./include/mp4v2/mp4v2.h \
- /home/marc/my_project/1126_mp4/./include/mp4v2/platform.h \
- /home/marc/my_project/1126_mp4/./include/mp4v2/project.h \
- /home/marc/my_project/1126_mp4/./include/mp4v2/general.h \
- /home/marc/my_project/1126_mp4/./include/mp4v2/file.h \
- /home/marc/my_project/1126_mp4/./include/mp4v2/file_prop.h \
- /home/marc/my_project/1126_mp4/./include/mp4v2/track.h \
- /home/marc/my_project/1126_mp4/./include/mp4v2/track_prop.h \
- /home/marc/my_project/1126_mp4/./include/mp4v2/sample.h \
- /home/marc/my_project/1126_mp4/./include/mp4v2/chapter.h \
- /home/marc/my_project/1126_mp4/./include/mp4v2/itmf_generic.h \
- /home/marc/my_project/1126_mp4/./include/mp4v2/itmf_tags.h \
- /home/marc/my_project/1126_mp4/./include/mp4v2/streaming.h \
- /home/marc/my_project/1126_mp4/./include/mp4v2/isma.h
+ /home/marc/my_project/1126_h264/./include/mp4v2/mp4v2.h \
+ /home/marc/my_project/1126_h264/./include/mp4v2/platform.h \
+ /home/marc/my_project/1126_h264/./include/mp4v2/project.h \
+ /home/marc/my_project/1126_h264/./include/mp4v2/general.h \
+ /home/marc/my_project/1126_h264/./include/mp4v2/file.h \
+ /home/marc/my_project/1126_h264/./include/mp4v2/file_prop.h \
+ /home/marc/my_project/1126_h264/./include/mp4v2/track.h \
+ /home/marc/my_project/1126_h264/./include/mp4v2/track_prop.h \
+ /home/marc/my_project/1126_h264/./include/mp4v2/sample.h \
+ /home/marc/my_project/1126_h264/./include/mp4v2/chapter.h \
+ /home/marc/my_project/1126_h264/./include/mp4v2/itmf_generic.h \
+ /home/marc/my_project/1126_h264/./include/mp4v2/itmf_tags.h \
+ /home/marc/my_project/1126_h264/./include/mp4v2/streaming.h \
+ /home/marc/my_project/1126_h264/./include/mp4v2/isma.h

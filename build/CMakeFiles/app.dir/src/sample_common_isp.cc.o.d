@@ -1,7 +1,7 @@
 CMakeFiles/app.dir/src/sample_common_isp.cc.o: \
- /home/marc/my_project/1126_mp4/src/sample_common_isp.cc \
+ /home/marc/my_project/1126_h264/src/sample_common_isp.cc \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/stdc-predef.h \
- /home/marc/my_project/1126_mp4/./include/sample_common.h \
+ /home/marc/my_project/1126_h264/./include/sample_common.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/assert.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/features.h \
  /opt/atk-dlrv1126-toolchain/arm-buildroot-linux-gnueabihf/sysroot/usr/include/sys/cdefs.h \
